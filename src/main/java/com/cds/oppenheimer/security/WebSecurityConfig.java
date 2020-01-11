@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatcher("/api/**")
             .authorizeRequests()
                 .antMatchers("/api/workingclasshero").hasRole("CLERK")
+                .antMatchers("/api/workingclassheroes").hasRole("CLERK")
             .anyRequest()
                 .authenticated();
     }

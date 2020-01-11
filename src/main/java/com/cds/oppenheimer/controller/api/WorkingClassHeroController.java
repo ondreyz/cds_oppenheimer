@@ -1,5 +1,8 @@
 package com.cds.oppenheimer.controller.api;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import com.cds.oppenheimer.dto.model.WorkingClassHeroDTO;
@@ -35,6 +38,26 @@ public class WorkingClassHeroController {
         try {
             workingClassHeroService.addWorkingClassHero(workingClassHeroModel);
             return ResponseEntity.ok(new ApiResponse<Object>("success", "", WorkingClassHeroMapper.toWorkingClassHeroDTO(workingClassHeroModel)));
+        } catch (DuplicateEntityException conflictException) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponse<Object>("error", conflictException.getMessage(), null));
+        }
+    }
+
+    /**
+     * Handles incoming POST API "/api/workingclassheroes"
+     * @param workingClassHeroesToAdd
+     * @return
+     */
+    @PostMapping("/workingclassheroes")
+    public ResponseEntity<ApiResponse<Object>> addWorkingClassHeroRecords(@RequestBody @Valid List<WorkingClassHeroDTO> workingClassHeroesToAdd) {
+        List<WorkingClassHero> workingClassHeroes =
+            workingClassHeroesToAdd
+                .stream()
+                .map(workingClassHeroToAdd -> WorkingClassHeroMapper.toWorkingClassHero(workingClassHeroToAdd))
+                .collect(Collectors.toList());
+        try {
+            workingClassHeroService.addWorkingClassHeroes(workingClassHeroes);
+            return ResponseEntity.ok(new ApiResponse<Object>("success", "", workingClassHeroesToAdd));
         } catch (DuplicateEntityException conflictException) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponse<Object>("error", conflictException.getMessage(), null));
         }
