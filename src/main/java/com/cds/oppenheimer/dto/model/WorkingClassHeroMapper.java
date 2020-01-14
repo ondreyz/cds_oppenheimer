@@ -2,6 +2,7 @@ package com.cds.oppenheimer.dto.model;
 
 import java.time.LocalDate;
 
+import com.cds.oppenheimer.enums.Gender;
 import com.cds.oppenheimer.model.WorkingClassHero;
 
 public class WorkingClassHeroMapper {
@@ -10,7 +11,7 @@ public class WorkingClassHeroMapper {
         return new WorkingClassHero(
             workingClassHeroDto.getNatid(),
             workingClassHeroDto.getName(),
-            workingClassHeroDto.getGender(),
+            Gender.get(workingClassHeroDto.getGender()),
             LocalDate.parse(workingClassHeroDto.getBirthday()),
             workingClassHeroDto.getSalary(),
             workingClassHeroDto.getTaxPaid()
@@ -21,7 +22,7 @@ public class WorkingClassHeroMapper {
         return new WorkingClassHeroDTO(
             workingClassHero.getNatid(),
             workingClassHero.getName(),
-            workingClassHero.getGender(),
+            workingClassHero.getGender().getGender(), // get string value of gender
             workingClassHero.getBirthday().toString(),
             workingClassHero.getSalary(),
             workingClassHero.getTaxPaid()
