@@ -28,6 +28,7 @@ public class MultiHttpSecurityConfig {
             .authorizeRequests()
                 .antMatchers("/api/workingclasshero").hasRole("CLERK")
                 .antMatchers("/api/workingclassheroes").hasRole("CLERK")
+                .antMatchers("/api/taxrelief/workingclassheroes").hasRole("BOOKKEEPER")
             .anyRequest()
                 .authenticated();
         }

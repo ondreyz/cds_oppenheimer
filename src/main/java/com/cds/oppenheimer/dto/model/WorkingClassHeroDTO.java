@@ -1,12 +1,7 @@
 package com.cds.oppenheimer.dto.model;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
-import com.cds.oppenheimer.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvCustomBindByName;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,15 +23,14 @@ public class WorkingClassHeroDTO {
     private String name;
 
     @CsvBindByName(column="gender", required=true)
-    // @CsvCustomBindByName(column="gender")
     private String gender;
 
     @CsvBindByName(column="birthday", required=true)
     private String birthday;
 
     @CsvBindByName(column="salary", required=true)
-    private long salary;
+    private double salary;
 
     @CsvBindByName(column="tax", required=true)
-    private long taxPaid;
+    private double taxPaid;
 }
