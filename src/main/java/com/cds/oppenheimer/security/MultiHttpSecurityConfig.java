@@ -49,6 +49,7 @@ public class MultiHttpSecurityConfig {
                     .antMatchers("/login").permitAll()
                     .antMatchers("/home").authenticated()
                     .antMatchers("/clerk").hasRole("CLERK")
+                    .antMatchers("/governor", "/governor/**").hasRole("GOVERNOR")
                 .anyRequest()
                     .authenticated()
                 .and()

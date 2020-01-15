@@ -8,6 +8,10 @@
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 
         <a th:if="${isClerk}" th:href="@{/clerk}">Upload file</a>
+        
+        <form th:if="${isGovernor}" th:action="@{/governor/dispensetaxrelief}" method="post">
+            <input style="background-color: red; color: white;" type="submit" value="Dispense Now"/>
+        </form>
 
         <br></br>
 
